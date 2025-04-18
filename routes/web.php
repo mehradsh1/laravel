@@ -13,5 +13,5 @@ Route::get('/', function () {
 Route::view('/about','about');
 
 Route::get('/product/{id}' , function (string $id){
-    return "Product ID = $id";
-});
+    return "works! $id";
+})->whereNumber('id');
