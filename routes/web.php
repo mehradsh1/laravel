@@ -7,7 +7,11 @@ Route::get('/', function () {
         "name"=> "Mehrad",
         "email"=> "mehrno55@gmail.com",
     ];
-    dd($person);
+    dump($person);
     return view('welcome');
 });
 Route::view('/about','about');
+
+Route::get('/product/{id}' , function (string $id){
+    return "Product ID = $id";
+});
