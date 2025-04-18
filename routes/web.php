@@ -11,7 +11,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::view('/about','about');
+Route::get('/user/{username}', function (string $username){
+    return "username= $username";
+})->where('username', '[a-z]+');
+Route::get('/search/{search}', function (string $search){
+    return "$search";
+})->where('search', '.+');
 
-Route::get('/product/{id}' , function (string $id){
-    return "works! $id";
-})->whereNumber('id');
+Route::get('{lang}/product/{id}' , function (string $lang,string $id){
+
+})->where(['lang' => '[a-z]{2}','id'=> '[\d]{4,}']);
