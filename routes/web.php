@@ -8,7 +8,7 @@ Route::get('/', function () {
     dd($productUrl);
     return view('welcome');
 });
-Route::view('/about_us','about')->name('about');
+Route::view('/about','about')->name('about');
 Route::get('/user/{username}', function (string $username){
     return "username= $username";
 })->where('username', '[a-z]+');
@@ -31,4 +31,7 @@ Route::name('admin.')-> group(function(){
     Route::get('/users',function (){
         return '/users';// esme routemoon hast "admin.users"
     })->name('users');
+});
+Route::fallback (function (){
+    return' jadidi inja donbale chi hasti boro about ro negah kon XD';
 });
