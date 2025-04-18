@@ -3,21 +3,32 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $person = [
-        "name"=> "Mehrad",
-        "email"=> "mehrno55@gmail.com",
-    ];
-    dump($person);
+
+    $productUrl = route('product.view', ['lang'=> 'en', 'id'=>1]);
+    dd($productUrl);
     return view('welcome');
 });
-Route::view('/about','about');
+Route::view('/about_us','about')->name('about');
 Route::get('/user/{username}', function (string $username){
     return "username= $username";
 })->where('username', '[a-z]+');
+
 Route::get('/search/{search}', function (string $search){
     return "$search";
 })->where('search', '.+');
 
-Route::get('{lang}/product/{id}' , function (string $lang,string $id){
+Route::get('/{lang}/product/{id}' , function (string $lang,string $id){
+//..
+})->where(['lang'=> '[a-z]{2}','id'=> '[\d]{4,}'])->name('product.view');
 
-})->where(['lang' => '[a-z]{2}','id'=> '[\d]{4,}']);
+Route::prefix('admin')-> group(function(){
+    Route::get('/users',function (){
+        return '/admin/users';
+    });
+});
+
+Route::name('admin.')-> group(function(){
+    Route::get('/users',function (){
+        return '/users';// esme routemoon hast "admin.users"
+    })->name('users');
+});
