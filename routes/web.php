@@ -9,5 +9,8 @@ Route::get('/', function () {
 });
 Route::view('/about','about')->name('about')->name('about');
 
-Route::get('/car',[CarController::class , 'index']);
+Route::controller(CarController::class)->group(function (){
+    Route::get('/car',  'index');
+    Route::get('/my-car',  'mycars');
+});
 
